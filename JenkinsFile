@@ -23,7 +23,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Tested'
+                script
+                {
+                    fileCheck('app.js')
+                }
             }
         }
         stage('Build') {
