@@ -1,35 +1,35 @@
+/* groovy-lint-disable CompileStatic */
+
+void fileCheck(String fname) {
+    if (fileExists(fname)) {
+        echo 'Hello World'
+    }
+    else
+    {
+        error fname & 'not found'
+    }
+}
+
 pipeline {
     agent any
-
     stages {
         stage('Initialize') {
                 steps {
-                echo 'Hello World'
-                }
-            }
-        
-        stage('Test') {
-            steps{
-            echo 'Tested'
-            }
-        }
-        
-        stage('Build') {
-            steps{
-            echo "Build Sucess, current Build number is ${currentBuild.number}"
-            }
-            post {
-                success{
-                    script{
-                        currentBuild.result='FAILURE'
+                script
+                    {
+                        fileCheck('index.htm')
                     }
                 }
+        }
+        stage('Test') {
+            steps {
+                echo 'Tested'
             }
         }
-    }
-    post{
-        always{
-            echo currentBuild.currentResult
+        stage('Build') {
+            steps {
+                echo "Build Sucess, current Build number is ${currentBuild.number}"
+            }
         }
     }
 }
