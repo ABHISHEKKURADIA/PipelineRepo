@@ -1,12 +1,14 @@
-/* groovy-lint-disable CompileStatic */
+/* groovy-lint-disable CompileStatic, NestedBlockDepth */
 
-void fileCheck(String fname) {
+boolean fileCheck(String fname) {
     if (fileExists(fname)) {
         echo "Sucess ${fname} found!"
+        return true
     }
     else
     {
-        error "${fname} not found"
+        echo "${fname} not found"
+        return false
     }
 }
 
@@ -17,7 +19,13 @@ pipeline {
                 steps {
                 script
                     {
-                        fileCheck('index.htm')
+                        if (fileCheck('index.htm')) {
+                            echo 'File Found will continue'
+                        }
+                        else
+                        {
+                            error 'Critical file index.htm missing'
+                        }
                     }
                 }
         }
@@ -25,7 +33,13 @@ pipeline {
             steps {
                 script
                 {
-                    fileCheck('app.js')
+                    if (fileCheck('app.js')) {
+                        echo 'App.js File Found will continue'
+                    }
+                    else
+                    {
+                        error 'Critical file app.js missing'
+                    }
                 }
             }
         }
