@@ -2,7 +2,7 @@
 
 void fileCheck(String fname) {
     if (fileExists(fname)) {
-        echo 'Hello World'
+        echo "Sucess ${fname} found!"
     }
     else
     {
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Build Sucess, current Build number is ${currentBuild.number}"
+                echo "Build Success, current Build number is ${currentBuild.number}"
             }
         }
     }
