@@ -16,7 +16,7 @@ pipeline {
         
         stage('Build') {
             steps{
-            echo 'Build Sucess, current Build number is ${currentBuild.number}'
+            echo "Build Sucess, current Build number is ${currentBuild.number}"
             }
         }
     }
